@@ -2,6 +2,8 @@
 var express = require('express')
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var authMiddleware = require('./auth');
+require('dotenv').config();
 
 // Import our router
 var apiRoutes = require('./api-router');
@@ -16,6 +18,7 @@ app.use(bodyParser.urlencoded({
 ));
 
 app.use(bodyParser.json());
+app.use(authMiddleware);
 
 // Connect to the mongoDB
 mongoose.connect('mongodb://localhost/contacts', {useNewUrlParser: true});
